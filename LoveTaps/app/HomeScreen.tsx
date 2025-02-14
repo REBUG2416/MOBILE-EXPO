@@ -125,7 +125,7 @@ navigation.replace('Login');
       return;
     }
   
-    fetch("http://192.168.0.115:5000/user-by-connectionId", {
+    fetch("https://mobile-expo.onrender.com/user-by-connectionId", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

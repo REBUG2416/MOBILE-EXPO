@@ -6,6 +6,9 @@ import IntroScreen from "./IntroScreen";
 import LoginRegister from "./LoginRegister";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
+import { PermissionsAndroid } from "react-native";
+
+
 
 export type RootStackParamList = {
   Intro: undefined;
@@ -17,6 +20,19 @@ const Stack = createStackNavigator();
 
 export default function Home() {
   const [user, setUser] = useState<any>(undefined);
+
+
+const requestPermissions = async () => {
+  try {
+    await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.INTERNET);
+  } catch (err) {
+    console.warn("Permission request failed:", err);
+  }
+};
+
+useEffect(() => {
+  requestPermissions();
+}, []);
 
   useEffect(() => {
     fetch("https://mobile-expo.onrender.com/user-by-connectionId", {
