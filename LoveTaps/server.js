@@ -24,7 +24,7 @@ let pool;
 try {
   pool = new Pool({
     connectionString:
-      "postgresql://lovetaps_user:O3tE6aYat2xQUEkd04Hs6EerKztUPD9k@dpg-cujmtmjv2p9s7383q0m0-a.oregon-postgres.render.com/lovetaps",
+      "postgresql://lovetaps_user:O3tE6aYat2xQUEkd04Hs6EerKztUPD9k@dpg-cujmtmjv2p9s7383q0m0-a/lovetaps",
     ssl: { rejectUnauthorized: false },
   });
   console.log("✅ Connected to the database");
