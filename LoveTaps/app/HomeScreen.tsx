@@ -788,7 +788,7 @@ gap:5,
       ) 
 }
       <View style={styles.loveText}>
-        <Text style={{ color: "red", width: 160 }}>From Kababi With Love</Text>
+        <Text style={{ color: "red", width: 160 }}>From Dera With Love</Text>
         <Image
           source={require(`../assets/images/heart2.png`)}
           style={{
