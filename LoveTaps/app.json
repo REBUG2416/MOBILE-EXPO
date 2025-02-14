@@ -1,9 +1,9 @@
 {
   "expo": {
     "splash": {
-      "image": "./assets/images/splashscreen_logo.png", 
-      "resizeMode": "contain",  
-      "backgroundColor": "#ffffff"  
+      "image": "./assets/images/splashscreen_logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
     "name": "lovetaps",
     "slug": "lovetaps",
@@ -34,8 +34,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "9ad75059-618d-4f78-a643-993235212aed"
+        "projectId": "bfe381b6-34a5-4715-b656-c786c72e7ede"
       }
-    }
+    },
+    "owner": "rebug2416"
   }
 }
