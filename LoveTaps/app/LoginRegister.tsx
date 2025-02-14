@@ -92,6 +92,13 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
     });
   }, []);
 
+  useEffect(() => {
+    registerForPushNotificationsAsync().then((token) => {
+      if (token) setMyToken(token);
+    });
+  }, []);
+
+
   const checkLogin = async ()=>{
 
     const userData = await AsyncStorage.getItem("user");
@@ -113,7 +120,7 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
       if (Name && password && myToken) {
         console.log("Logging in with:", Name, password);
 
-        fetch("http://192.168.0.115:5000/login", {
+        fetch("https://mobile-expo.onrender.com/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -151,7 +158,7 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
         password: password,
       });
       if (Name && password) {
-        fetch("http://192.168.0.115:5000/register", {
+        fetch("https://mobile-expo.onrender.com/register", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

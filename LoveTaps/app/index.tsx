@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import HomeScreen from "./HomeScreen";
 import IntroScreen from "./IntroScreen";
 import LoginRegister from "./LoginRegister";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 
 export type RootStackParamList = {
@@ -17,6 +17,19 @@ const Stack = createStackNavigator();
 
 export default function Home() {
   const [user, setUser] = useState<any>(undefined);
+
+  useEffect(() => {
+    fetch("https://mobile-expo.onrender.com/user-by-connectionId", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ connectionId: "dummy-connection" }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Server woke up:", data))
+      .catch((err) => console.error("Wake-up error:", err));
+  }, []);
 
   return (
     <SafeAreaProvider style={{ flex: 1 }}>

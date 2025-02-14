@@ -28,7 +28,7 @@ const IntroScreen: React.FC<Props> = ({ navigation }) => {
       Animated.delay(1500),
       Animated.timing(fadeAnim, {
         toValue: 0,
-        duration: 500,
+        duration: 400,
         useNativeDriver: true,
       }), 
     ]).start(() => {
