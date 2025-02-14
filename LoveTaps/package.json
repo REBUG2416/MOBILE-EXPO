@@ -26,7 +26,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "expo": "~52.0.11",
-    "expo-blur": "~14.0.1",
+    "expo-blur": "~14.0.3",
     "expo-constants": "~17.0.3",
     "expo-dev-client": "~5.0.4",
     "expo-device": "~7.0.2",
