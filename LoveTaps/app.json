@@ -37,6 +37,9 @@
         "projectId": "bfe381b6-34a5-4715-b656-c786c72e7ede"
       }
     },
-    "owner": "rebug2416"
+    "owner": "rebug2416",
+    "plugins": [
+      "expo-build-properties"
+    ]
   }
 }
