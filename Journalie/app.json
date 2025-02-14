@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "splash": {
+      "image": "./assets/images/splashscreen_logo.png", 
+      "resizeMode": "contain",  
+      "backgroundColor": "#ffffff"  
+    },
+    "name": "Journalie",
+    "slug": "Journalie",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.rebug2416.Journalie"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.rebug2416.Journalie"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9ad75059-618d-4f78-a643-993235212aed"
+      }
+    }
+  }
+}
