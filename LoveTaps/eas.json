@@ -10,14 +10,7 @@
       }
     },
     "production": {
-      "android": {
-        "buildType": "apk",
-        "googleServicesFile": "./google-services.json",
-        "autoIncrement": true
-      },
-      "env": {
-        "EXPO_GOOGLE_SERVICES_FILE": "./google-services.json"
-      }
+      "autoIncrement": true
     }
   },
   "submit": {
