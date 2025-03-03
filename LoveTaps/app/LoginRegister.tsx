@@ -47,37 +47,32 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
 
   const { width } = Dimensions.get("window");
 
-  async function registerForPushNotificationsAsync() {
-    if (!Device.isDevice) {
-      Alert.alert("Error", "Push notifications only work on physical devices.");
-      return;
-    }
-
-    const { status: existingStatus } =
-      await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-
-    // Request permission if not granted
-    if (existingStatus !== "granted") {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-
-    if (finalStatus !== "granted") {
-      Alert.alert(
-        "Permission Denied",
-        "Enable notifications to receive alerts."
-      );
-      return;
-    }
-
-    const token = (await Notifications.getExpoPushTokenAsync({
-      projectId: "bfe381b6-34a5-4715-b656-c786c72e7ede",
-    })).data;
-    console.log("Push Token:", token);
-    return token;
+async function registerForPushNotificationsAsync() {
+  if (!Device.isDevice) {
+    Alert.alert("Error", "Push notifications only work on a physical device.");
+    return;
   }
 
+  const { status: existingStatus } = await Notifications.getPermissionsAsync();
+  let finalStatus = existingStatus;
+
+  if (existingStatus !== "granted") {
+    const { status } = await Notifications.requestPermissionsAsync();
+    finalStatus = status;
+  }
+
+  if (finalStatus !== "granted") {
+    Alert.alert("Permission Denied", "Enable notifications to receive alerts.");
+    return;
+  }
+
+  const token = (await Notifications.getExpoPushTokenAsync()).data;
+  console.log("Expo Push Token:", token);
+
+  Alert.alert("Push Token", token || "No token generated");
+
+  return token;
+}
   useEffect(() => {
     Notifications.setNotificationHandler({
       handleNotification: async () => ({
