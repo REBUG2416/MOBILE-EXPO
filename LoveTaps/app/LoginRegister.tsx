@@ -3,6 +3,7 @@ import { StackNavigationProp, StackScreenProps } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
+import { Image } from 'expo-image';
 
 import { useEffect, useState } from "react";
 import {
@@ -12,7 +13,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-  Image,
   Keyboard,
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
@@ -71,7 +71,9 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
       return;
     }
 
-    const token = (await Notifications.getExpoPushTokenAsync()).data;
+    const token = (await Notifications.getExpoPushTokenAsync({
+      projectId: "bfe381b6-34a5-4715-b656-c786c72e7ede",
+    })).data;
     console.log("Push Token:", token);
     return token;
   }
@@ -92,32 +94,27 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
     });
   }, []);
 
+
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token) => {
-      if (token) setMyToken(token);
-    });
-  }, []);
+    const checkLogin = async ()=>{
+      const userData = await AsyncStorage.getItem("user");
+      if (userData === undefined) {
+          console.log(userData);  
+      setUser(JSON.parse(userData!))
+        console.log("User is already logged in:", userData);  
+        navigation.replace('LoveTaps');
+      } else {
+        console.log("User needs to log in.");
+      }  
+    }
+    checkLogin();
+    }, []);
 
-
-  const checkLogin = async ()=>{
-
-    const userData = await AsyncStorage.getItem("user");
-    if (userData) {
-        console.log(userData);
-        
-    setUser(JSON.parse(userData))
-      console.log("User is already logged in:", user.connectionId);
-      navigation.replace('LoveTaps');
-    } else {
-      console.log("User needs to log in.");
-    }  
-  }
-  checkLogin();
 
  
   const handleSubmit = () => {
     if (isLogin) {
-      if (Name && password && myToken) {
+      if (Name && password) {
         console.log("Logging in with:", Name, password);
 
         fetch("https://mobile-expo.onrender.com/login", {

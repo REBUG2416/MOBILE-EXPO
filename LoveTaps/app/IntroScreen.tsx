@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Image, Animated } from "react-native";
+import { View, Text, StyleSheet,Animated } from "react-native";
+import { Image } from 'expo-image';
 import { StackNavigationProp } from '@react-navigation/stack';
  type RootStackParamList = {
    Intro: undefined;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "208813430972",
+    "project_id": "lovetaps-9cb5e",
+    "storage_bucket": "lovetaps-9cb5e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208813430972:android:b1fadbcff980e0d31898b9",
+        "android_client_info": {
+          "package_name": "com.rebug2416.lovetaps"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-bj1ypwfOwqzZxdXNalJYI8hTqBrGncU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

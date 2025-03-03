@@ -15,6 +15,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
+      "googleServicesFile": "./google-services.json",
       "bundleIdentifier": "com.rebug2416.lovetaps"
     },
     "android": {
@@ -22,7 +23,9 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.rebug2416.lovetaps"
+      "googleServicesFile": "./google-services.json",
+      "package": "com.rebug2416.lovetaps",
+      "useNextNotificationsApi": true
     },
     "web": {
       "bundler": "metro",

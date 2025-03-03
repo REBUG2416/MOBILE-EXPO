@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { Image } from 'expo-image';
 import * as Notifications from "expo-notifications";
 import * as Device from "expo-device";
 import {
@@ -9,12 +10,10 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
-  Image,
   Vibration,
   Platform,
   ScrollView,
   Dimensions,
-  Button,
   TextInput,
   KeyboardAvoidingView,
 } from "react-native";
@@ -84,7 +83,7 @@ const HomeScreen:React.FC<HomeRegisterProps> = ({navigation, user, setUser })=>{
     
     if(selAvatar){
       await AsyncStorage.setItem("user", JSON.stringify({username:user.username,token:user.token,connectId:user.connectionId,avatar:selAvatar}));
-      fetch("http://192.168.0.115:5000/update-avatar", {
+      fetch("https://mobile-expo.onrender.com/update-avatar", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: user.username, avatar:id })
@@ -395,7 +394,14 @@ if(Type === 0){
     setLastTap(new Date());
   };
 
-  const heartcuds = ["", "", "", "", "", "", ""];
+  const createArrayForWidth = (width: number) => {
+    const numElements = Math.floor(width / 51);
+    return Array.from({ length: numElements }, (_, i) => i);
+  };
+  
+
+  const heartcuds = createArrayForWidth(width);
+  
   return (
     <KeyboardAvoidingView
     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -477,7 +483,6 @@ if(Type === 0){
 display:"flex",
 marginVertical:30,
 paddingHorizontal:50,
-height:50,
 gap:5,
 
         }}
@@ -588,7 +593,7 @@ gap:5,
                 await AsyncStorage.setItem("selHeart", JSON.stringify(btn));
               }}
             >
-              <Text  style={{ fontSize: 20 }}>Select:</Text>
+              <Text  style={{ fontSize: 15 }}>Select:</Text>
               <Image style={{ width: 30, height: 30 }} source={btn} />
             </TouchableOpacity>
         ))}
@@ -622,99 +627,136 @@ gap:5,
           />
         </Animated.View>
       ))}
-
-      <Animated.Image
-        source={require(`../assets/images/Cuddling Gif.gif`)}
-        style={[
+        <Animated.View        style={[
           styles.heartCuds,
           {
-            width: 150,
-            height: 200,
             opacity: tapAnim > -1 ? opacityAnim : 0,
             top: 60,
             left: -20,
           },
-        ]}
-      />
-
-      <Animated.Image
+        ]}> 
+      <Image
         source={require(`../assets/images/Cuddling Gif.gif`)}
         style={[
           styles.heartCuds,
           {
             width: 150,
             height: 200,
-            opacity: tapAnim > 0.4 ? opacityAnim : 0,
-            top: -20,
-            right: -20,
           },
         ]}
       />
-      <Animated.Image
+      </Animated.View>
+      <Animated.View        style={[
+          styles.heartCuds,
+          {
+            opacity: tapAnim > 0.4 ? opacityAnim : 0,
+            top: 0,
+            right: 140,
+          },
+        ]}> 
+      <Image
         source={require(`../assets/images/Cuddling Gif.gif`)}
         style={[
           styles.heartCuds,
           {
             width: 150,
             height: 200,
+          },
+        ]}
+      />
+      </Animated.View>
+
+      <Animated.View        style={[
+          styles.heartCuds,
+          {
             opacity: tapAnim > -1 ? opacityAnim : 0,
             top: 350,
-            right: -20,
+            right: 140,
           },
-        ]}
-      />
-      <Animated.Image
+        ]}> 
+      <Image
         source={require(`../assets/images/Cuddling Gif.gif`)}
         style={[
           styles.heartCuds,
           {
             width: 150,
             height: 200,
-            opacity: tapAnim > 0.4 ? opacityAnim : 0,
-            bottom: 150,
-            left: -40,
           },
         ]}
       />
-      <Animated.Image
+      </Animated.View>
+
+      <Animated.View        style={[
+          styles.heartCuds,
+          {
+            opacity: tapAnim > 0.4 ? opacityAnim : 0,
+            bottom: 350,
+            left: -20,
+          },
+        ]}> 
+      <Image
+        source={require(`../assets/images/Cuddling Gif.gif`)}
+        style={[
+          styles.heartCuds,
+          {
+            width: 150,
+            height: 200,
+          },
+        ]}
+      />
+      </Animated.View>
+
+      <Animated.View        style={[
+          styles.heartflow,
+          {
+            zIndex: tapAnim > 0.7 ? 10 : -10,
+            opacity: tapAnim > 0.7 ? opacityAnim : 0,
+          },
+        ]}> 
+      <Image
         source={require(`../assets/images/download (1).gif`)}
         style={[
           styles.heartflow,
           {
             width: width,
             height: 1000,
-            zIndex: tapAnim > 0.7 ? 10 : -10,
-            opacity: tapAnim > 0.7 ? opacityAnim : 0,
           },
         ]}
       />
-      <TouchableWithoutFeedback
+      </Animated.View>
+
+    <TouchableWithoutFeedback
         style={[
           styles.heartContainer,
           { transform: [{ scale: scaleValue }, { translateX: shakeAnim }] },
         ]}
       >
-        <Animated.Image
-          source={require(`../assets/images/download.gif`)}
-          style={[
+    <Animated.View  style={[
             styles.heartflow,
             { transform: [{ scaleX: spiralAnim }, { scaleY: spiralAnim }] },
-          ]}
+          ]}>
+    <Image
+          source={require('../assets/images/download.gif')}
+          style={[          
+{ width:500, height:500,zIndex:9999,
+}]}
         />
+    </Animated.View>
+      
         <TouchableWithoutFeedback
           style={[
             styles.heartButton,
-            { transform: [{ scale: scaleValue }, { translateX: shakeAnim }] },
+            { transform: [{ scale: scaleValue }, { translateX: shakeAnim }], backgroundColor:selBtn === require("../assets/images/leah2.png") ? "3d362e" : "white" }, 
           ]}
           onPress={handleHeartPress}
           onPressIn={() => {
-            if(partnerData.token !== undefined){
+            if(isConnected){
             onPressIn();
             startShake();
             }
           }}
           onPressOut={() => {
-            if(partnerData.token !== undefined){
+            if(isConnected){
             onPressOut();
             stopShake();
             }
@@ -777,7 +819,7 @@ gap:5,
     paddingHorizontal: 15,
     backgroundColor: "#3498db",
     borderRadius: 5,}} onPress={connectPartner}>
-          <Text style={styles.connectButtonText}>☑️</Text>
+          <Text style={styles.connectButtonText}>✅</Text>
         </TouchableOpacity>
         </View>
       </>}
@@ -829,6 +871,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     alignItems: "center",
     paddingHorizontal: 15,
+    paddingRight:15,
     paddingVertical: 15,
     backgroundColor: "white",
     gap: 10,
@@ -842,7 +885,6 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    zIndex: 0,
     transitionDuration: "2s",
   },
 
