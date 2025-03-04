@@ -10,8 +10,11 @@
       }
     },
     "production": {
-      "autoIncrement": true
-    }
+      "android": {
+      "buildType": "apk",
+      "googleServicesFile": "./google-services.json",
+      "autoIncrement": true  
+        }  }
   },
   "submit": {
     "production": {}
