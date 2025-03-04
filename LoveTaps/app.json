@@ -15,10 +15,8 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rebug2416.lovetaps",
-      "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
+      "googleServicesFile": "./google-services.json",
+      "bundleIdentifier": "com.rebug2416.lovetaps"
     },
     "android": {
       "adaptiveIcon": {
