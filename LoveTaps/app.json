@@ -15,7 +15,6 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "googleServicesFile": "./google-services.json",
       "bundleIdentifier": "com.rebug2416.lovetaps"
     },
     "android": {
