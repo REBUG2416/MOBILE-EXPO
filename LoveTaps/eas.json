@@ -12,7 +12,6 @@
     "production": {
       "android": {
       "buildType": "apk",
-      "googleServicesFile": "./google-services.json",
       "autoIncrement": true  
         }  }
   },
