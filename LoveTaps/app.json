@@ -3,7 +3,7 @@
     "splash": {
       "image": "./assets/images/splashscreen_logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "name": "lovetaps",
     "slug": "lovetaps",

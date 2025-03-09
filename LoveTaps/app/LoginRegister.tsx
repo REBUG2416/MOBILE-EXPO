@@ -66,10 +66,8 @@ async function registerForPushNotificationsAsync() {
     return;
   }
 
-  const token = (await Notifications.getExpoPushTokenAsync()).data;
+  const token = (await Notifications.getDevicePushTokenAsync()).data;
   console.log("Expo Push Token:", token);
-
-  Alert.alert("Push Token", token || "No token generated");
 
   return token;
 }
@@ -78,7 +76,7 @@ async function registerForPushNotificationsAsync() {
       handleNotification: async () => ({
         shouldShowAlert: true,
         shouldPlaySound: true,
-        shouldSetBadge: false,
+        shouldSetBadge: true,
       }),
     });
   }, []);
@@ -89,23 +87,31 @@ async function registerForPushNotificationsAsync() {
     });
   }, []);
 
+  useEffect(() => {
+    const notificationListener = Notifications.addNotificationReceivedListener(notification => {
+      console.log("Notification Received:", notification);
+    });
+  
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+    };
+  }, []);
 
   useEffect(() => {
+    checkLogin();
+    }, []);
+
     const checkLogin = async ()=>{
       const userData = await AsyncStorage.getItem("user");
-      if (userData === undefined) {
+      if (userData !== undefined) {
           console.log(userData);  
       setUser(JSON.parse(userData!))
         console.log("User is already logged in:", userData);  
-        navigation.replace('LoveTaps');
+        navigation.replace("LoveTaps");
       } else {
         console.log("User needs to log in.");
       }  
     }
-    checkLogin();
-    }, []);
-
-
  
   const handleSubmit = () => {
     if (isLogin) {
