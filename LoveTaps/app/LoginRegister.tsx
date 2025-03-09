@@ -201,6 +201,7 @@ async function registerForPushNotificationsAsync() {
               placeholder="Name"
               value={Name}
               onChangeText={setName}
+              placeholderTextColor="#efefef"
               keyboardType="default"
               autoCapitalize="none"
               returnKeyType="next"
@@ -210,6 +211,7 @@ async function registerForPushNotificationsAsync() {
               placeholder="Password"
               value={password}
               onChangeText={setPassword}
+              placeholderTextColor="#efefef"
               secureTextEntry
               returnKeyType={isLogin ? "done" : "next"}
             />
@@ -219,6 +221,7 @@ async function registerForPushNotificationsAsync() {
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
+                placeholderTextColor="#efefef"
                 secureTextEntry
                 returnKeyType="done"
               />
