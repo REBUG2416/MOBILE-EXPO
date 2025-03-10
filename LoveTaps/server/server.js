@@ -1,9 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+const admin =  require("firebase-admin");
+const serviveAccount =  require("../lovetaps-9cb5e-firebase-adminsdk-fbsvc-48015b6f90.json");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const app = express();
 const cors = require("cors");
 app.use(
@@ -15,6 +16,29 @@ app.use(
 );
 
 app.use(express.json());
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+app.post("/sendNotification", async (req, res) => {
+  try {
+    const message = req.body; 
+
+    if (!message.token) {
+      return res.status(400).json({ error: "Missing FCM token." });
+    }
+
+    await admin.messaging().send(message);
+    console.log("Notification sent successfully!");
+
+    res.status(200).json({ success: true, message: "Notification sent successfully!" });
+  } catch (error) {
+    console.error("Error sending notification:", error);
+    res.status(500).json({ error: "Failed to send notification." });
+  }
+});
+
 
 const JWT_SECRET =
   "a527f9602e023dd7cd8f6d7af76feb32dcb68da9f3144bfb709848b7d588818ce1c22d4003de94cf921d491a2f3bdb4067f50c1386719e3b81ae6026bbacbe31";
