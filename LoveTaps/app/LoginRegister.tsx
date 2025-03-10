@@ -102,8 +102,8 @@ async function registerForPushNotificationsAsync() {
     }, []);
 
     const checkLogin = async ()=>{
-      const userData = await AsyncStorage.getItem("user");
-      if (userData !== undefined) {
+      const userData = await AsyncStorage.getItem("user3");
+      if (userData !== null) {
           console.log(userData);  
       setUser(JSON.parse(userData!))
         console.log("User is already logged in:", userData);  
