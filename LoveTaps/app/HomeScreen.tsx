@@ -168,63 +168,110 @@ navigation.replace('Login');
 
   },[])
   
-  const sendPushNotification = async (token:string | undefined,Type:number) => {
-  if (!token) {
-    Alert.alert("Error", "Your partner’s device is not registered.");
-    return;
-  }
-  let message;
-if(Type === 0.7){
-  message = {
-    to: token,
-    sound: "default",
-    title: "💙Just you and me💜",
-    body: "Thinking about you😍",
-    data: { action: "love_tap" },
-  }
-}
-if(Type === 0.5){
-  message = {
-    to: token,
-    sound: "default",
-    title: "Hope you're fine🫂",
-    body: user.username+" is checking on you😘",
-    data: { action: "love_tap" },
-  }
-}
-if(Type === 0.9){
-  message = {
-    to: token,
-    sound: "default",
-    title: "💖Love Bomb!!!!!!!!!!!",
-    body:  user.username+" misses you like crazy💞💞💞",
-    data: { action: "love_tap" },
-  }
-}
-if(Type === 0){
-  message = {
-    to: token,
-    sound: "default",
-    title: "I miss you🥺",
-    body:  user.username+" sent you a Love Tap❣️",
-    data: { action: "love_tap" },
-  }
-
-}
-
-
-  await fetch("https://exp.host/--/api/v2/push/send", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Accept-Encoding": "gzip, deflate",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(message),
-  });
-};
-
-  const Buttons = [
+  const sendPushNotification = async (token: string | undefined, Type: number) => {
+    if (!token) {
+      Alert.alert("Error", "Your partner’s device is not registered.");
+      return;
+    }
+  
+    let message;
+  
+    if (Type === 0.7) {
+      message = {
+        token: token, 
+        notification: {
+          title: "💙Just you and me💜",
+          body: "Thinking about you😍",
+        },
+        android: {
+          priority: "high",
+          notification: { sound: "default" },
+        },
+        apns: {
+          payload: {
+            aps: { sound: "default" },
+          },
+        },
+        data: { action: "love_tap" },
+      };
+    }
+    
+    if (Type === 0.5) {
+      message = {
+        token: token,
+        notification: {
+          title: "Hope you're fine🫂",
+          body: user.username + " is checking on you😘",
+        },
+        android: {
+          priority: "high",
+          notification: { sound: "default" },
+        },
+        apns: {
+          payload: {
+            aps: { sound: "default" },
+          },
+        },
+        data: { action: "love_tap" },
+      };
+    }
+    
+    if (Type === 0.9) {
+      message = {
+        token: token,
+        notification: {
+          title: "💖Love Bomb!!!!!!!!!!!",
+          body: user.username + " misses you like crazy💞💞💞",
+        },
+        android: {
+          priority: "high",
+          notification: { sound: "default" },
+        },
+        apns: {
+          payload: {
+            aps: { sound: "default" },
+          },
+        },
+        data: { action: "love_tap" },
+      };
+    }
+    
+    if (Type === 0) {
+      message = {
+        token: token,
+        notification: {
+          title: "I miss you🥺",
+          body: user.username + " sent you a Love Tap❣️",
+        },
+        android: {
+          priority: "high",
+          notification: { sound: "default" },
+        },
+        apns: {
+          payload: {
+            aps: { sound: "default" },
+          },
+        },
+        data: { action: "love_tap" },
+      };
+    }
+    
+    try {
+      const response = await fetch("https://mobile-expo.onrender.com/sendNotification", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
+      });
+  
+      const result = await response.json();
+      console.log("Push Notification Response:", result);
+    } catch (error) {
+      console.error("Failed to send push notification:", error);
+    }
+  };
+    const Buttons = [
     require("../assets/images/hand.png"),
     require("../assets/images/heartBlue.png"),
     require("../assets/images/heartPurple.png"),
