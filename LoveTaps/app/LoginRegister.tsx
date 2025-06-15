@@ -66,10 +66,12 @@ async function registerForPushNotificationsAsync() {
     return;
   }
 
-  const token = (await Notifications.getDevicePushTokenAsync()).data;
+  const token = (await Notifications.getExpoPushTokenAsync()).data;
   console.log("Expo Push Token:", token);
 
-  return token;
+  Alert.alert("Push Token", token || "No token generated");
+
+return token;
 }
   useEffect(() => {
     Notifications.setNotificationHandler({
@@ -102,7 +104,7 @@ async function registerForPushNotificationsAsync() {
     }, []);
 
     const checkLogin = async ()=>{
-      const userData = await AsyncStorage.getItem("user3");
+      const userData = await AsyncStorage.getItem("user");
       if (userData !== null) {
           console.log(userData);  
       setUser(JSON.parse(userData!))
