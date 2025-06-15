@@ -66,8 +66,12 @@ async function registerForPushNotificationsAsync() {
     return;
   }
 
-  const token = (await Notifications.getExpoPushTokenAsync()).data;
-  console.log("Expo Push Token:", token);
+  const projectId = "bfe381b6-34a5-4715-b656-c786c72e7ede";
+  const tokenResponse = await Notifications.getExpoPushTokenAsync({
+    projectId, // ← pass this explicitly
+  });
+
+  const token = tokenResponse.data;  console.log("Expo Push Token:", token);
 
   Alert.alert("Push Token", token || "No token generated");
 
