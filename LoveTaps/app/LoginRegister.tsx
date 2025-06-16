@@ -123,15 +123,7 @@ const LoginRegister: React.FC<LoginRegisterProps> = ({
 
 return token;
 }
- */  useEffect(() => {
-    Notifications.setNotificationHandler({
-      handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: true,
-      }),
-    });
-  }, []);
+ */  
 
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {

@@ -1,6 +1,7 @@
 import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import * as Notifications from "expo-notifications";
 import HomeScreen from "./HomeScreen";
 import IntroScreen from "./IntroScreen";
 import LoginRegister from "./LoginRegister";
@@ -21,7 +22,15 @@ export default function Home() {
   const [user, setUser] = useState<any>(undefined);
 
 
-
+  useEffect(() => {
+    Notifications.setNotificationHandler({
+      handleNotification: async () => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: true,
+      }),
+    });
+  }, []);
 
   useEffect(() => {
     fetch("https://mobile-expo.onrender.com/user-by-connectionId", {
