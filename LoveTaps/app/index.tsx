@@ -8,6 +8,13 @@ import LoginRegister from "./LoginRegister";
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
 
 
 export type RootStackParamList = {
@@ -20,17 +27,6 @@ const Stack = createStackNavigator();
 
 export default function Home() {
   const [user, setUser] = useState<any>(undefined);
-
-
-  useEffect(() => {
-    Notifications.setNotificationHandler({
-      handleNotification: async () => ({
-        shouldShowAlert: true,
-        shouldPlaySound: true,
-        shouldSetBadge: true,
-      }),
-    });
-  }, []);
 
   useEffect(() => {
     fetch("https://mobile-expo.onrender.com/user-by-connectionId", {
