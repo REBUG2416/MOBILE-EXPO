@@ -4,7 +4,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-
+import { Op, col, cast } from "sequelize";
 const app = express();
 
 app.use(
