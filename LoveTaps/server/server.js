@@ -4,7 +4,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-import { Op, col, cast } from "sequelize";
+
 const app = express();
 
 app.use(
@@ -58,7 +58,7 @@ const User = sequelize.define(
       allowNull: true,
     },
     connectionid: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING,
       defaultValue: DataTypes.UUIDV4, // generates a random v4 uuid
       allowNull: false,
     },
@@ -140,16 +140,14 @@ app.post("/login", async (req, res) => {
 
 // Get user by connectionId
 app.post("/user-by-connectionId", async (req, res) => {
-  const { connectionId } = (req.body);
-  connectionId = connectionId.trim().toLowerCase();
+  const { connectionId } = req.body;
   console.log(req.body);
 
   try {
     const user = await User.findOne({
       where: sequelize.where(
-        // cast uuid to text, then do a LIKE prefix match
-        sequelize.cast(sequelize.col("connectionid"), "text"),
-        { [Op.like]: `${connectionId}%` }
+        sequelize.fn("SUBSTRING", sequelize.col("connectionid"), 1, 13),
+        connectionId
       ),
     });
 
