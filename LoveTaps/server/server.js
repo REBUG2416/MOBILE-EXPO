@@ -22,7 +22,7 @@ const JWT_SECRET =
 
 // Sequelize setup
 const sequelize = new Sequelize(
-  "postgresql://lovetaps_to3q_user:a6SFkv4cCg9N1aMz6XeFdzHZccX4VhbP@dpg-d16sis3uibrs73eo5ej0-a.oregon-postgres.render.com/lovetaps_to3q",
+  "postgresql://lovetaps_9aha_user:njrEuOyfI4H75rDELF8szb76C9Xq4C7D@dpg-d34fsijipnbc73fuioc0-a.oregon-postgres.render.com/lovetaps_9aha",
   {
     dialect: "postgres",
     dialectOptions: {
