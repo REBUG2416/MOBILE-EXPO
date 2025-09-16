@@ -140,7 +140,8 @@ app.post("/login", async (req, res) => {
 
 // Get user by connectionId
 app.post("/user-by-connectionId", async (req, res) => {
-  const { connectionId } = (req.body.connectionId || "").trim().toLowerCase();
+  const { connectionId } = (req.body);
+  connectionId = connectionId.trim().toLowerCase();
   console.log(req.body);
 
   try {
