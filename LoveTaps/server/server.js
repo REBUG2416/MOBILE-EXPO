@@ -140,14 +140,15 @@ app.post("/login", async (req, res) => {
 
 // Get user by connectionId
 app.post("/user-by-connectionId", async (req, res) => {
-  const { connectionId } = req.body;
+  const { connectionId } = (req.body.connectionId || "").trim().toLowerCase();
   console.log(req.body);
 
   try {
     const user = await User.findOne({
       where: sequelize.where(
-        sequelize.fn("SUBSTRING", sequelize.col("connectionid"), 1, 13),
-        connectionId
+        // cast uuid to text, then do a LIKE prefix match
+        sequelize.cast(sequelize.col("connectionid"), "text"),
+        { [Op.like]: `${connectionId}%` }
       ),
     });
 
